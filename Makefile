@@ -2,7 +2,7 @@ engine: main.o
 	gcc -Wall -g -o engine main.o mathlib.o -framework SDL2 -lGLEW
 
 test_mathlib: mathlib.o util.o
-	gcc -Wall -g -o test mathlib.o util.o ./tests/test_math_library.c -framework SDL2 -lGLEW
+	gcc -Wall -g -o test mathlib.o util.o ./tests/test_math_library.c ./tests/test_math_library_vec2.c -framework SDL2 -lGLEW
 
 main.o: main.c
 	gcc -c main.c
