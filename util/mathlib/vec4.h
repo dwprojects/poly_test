@@ -2,6 +2,7 @@
 #define VEC4_H
 
 #include <GL/glew.h>
+#include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
