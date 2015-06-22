@@ -19,9 +19,9 @@ Model * model_init(GLfloat *vertices, unsigned int vertex_count)
 	Model *model = NULL;
 	model = malloc(sizeof(Model));
 
-	// Methods
 	if (model)
 	{
+		// Methods
 		model->draw = draw;
 
 		// Attributes

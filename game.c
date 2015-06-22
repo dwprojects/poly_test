@@ -35,17 +35,19 @@ static int get_cap_ticks(Game *self)
 
 static void render(Game *self)
 {
-	/*
+
 	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
 	self->shader->bind(self->shader);
 	self->model->draw(self->model);
 	render_update(self->display->window);
-	*/
+
+	/*
 	glClearColor(0.0f, 0.15f, 0.2f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	self->shader->bind(self->shader);
 	self->model->draw(self->model);
 	SDL_GL_SwapWindow(self->display->window);
+	*/
 }
 
 static void close(Game *self)
