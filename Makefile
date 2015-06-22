@@ -1,5 +1,11 @@
-engine: main.o
-	gcc -Wall -g -o engine main.o mathlib.o -framework SDL2 -lGLEW
+engine: main.o mathlib.o util.o display.o render.o timer.o
+	gcc -Wall -g -o engine main.o \
+	mathlib.o \
+	util.o \
+	display.o \
+	render.o \
+	timer.o \
+	-framework SDL2 -framework OpenGL -lGLEW
 
 test_mathlib: mathlib.o util.o
 	gcc -Wall -g -o test mathlib.o util.o ./tests/test_math_library.c \
@@ -7,10 +13,19 @@ test_mathlib: mathlib.o util.o
 	 ./tests/test_math_library_vec3.c \
 	 ./tests/test_math_library_mat4.c \
 	 ./tests/test_math_library_quaternion.c \
-	 -framework SDL2 -lGLEW
+	 -framework SDL2 -framework OpenGL -lGLEW
 
 main.o: main.c
 	gcc -c main.c
+
+display.o: display.c
+	gcc -c display.c
+
+render.o: render.c
+	gcc -c render.c
+
+timer.o: ./util/timer/timer.c
+	gcc -c ./util/timer/timer.c
 
 util.o: ./util/util.c
 	gcc -c ./util/util.c
@@ -30,7 +45,7 @@ mathlib.o: ./util/mathlib/vec2.c \
 	ld -r vec2.o vec3.o vec4.o vertex.o mat4.o quaternion.o -o mathlib.o
 
 clean:
-	rm engine main.o mathlib.o
+	rm engine *.o
 
 clean_test:
 	rm test *.o
