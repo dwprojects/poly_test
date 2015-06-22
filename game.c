@@ -65,6 +65,7 @@ Game * game_init()
 		game->display = NULL;
 		game->fps = NULL;
 		game->cap = NULL;
+		game->transform = NULL;
 
 		// Display
 		game->display = display_init("OpenGL Test", SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -77,10 +78,16 @@ Game * game_init()
 		// Timers
 		game->fps = timer_init();
     	game->cap = timer_init();
-
     	if (!game->fps && game->cap)
     	{
-    		printf("Error creating timers");
+    		printf("Error creating timers\n");
+    	}
+
+    	// Transform
+    	game->transform = transform_init();
+    	if (!game->transform)
+    	{
+    		printf("Error creating transform\n");
     	}
 
 	}

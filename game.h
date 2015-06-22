@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "display.h"
 #include "input.h"
+#include "transform.h"
 #include "./util/timer/timer.h"
 
 typedef struct _Game 
@@ -20,6 +21,8 @@ typedef struct _Game
 	Display *display;
 	Timer *fps;
 	Timer *cap;
+
+	Transform *transform;
 
 	void (*start)(struct _Game *);
 	void (*stop)(struct _Game *);
