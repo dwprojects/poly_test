@@ -70,3 +70,9 @@ Quaternion * quaternion_init(GLfloat x, GLfloat y,
 
 	return(quaternion);
 }
+
+void destroy_quaternion(Quaternion *q)
+{
+	free(q);
+	q = NULL;
+}

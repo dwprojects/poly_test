@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "shader.h"
 
-char * load_shader(Shader *self, char *str, char*ext)
+char * load_shader(Shader *self, char *str, char *ext)
 {
 	/*
 	FILE *fp;

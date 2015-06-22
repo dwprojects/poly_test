@@ -20,23 +20,28 @@ int main(int args, char *argv[])
 		while(game->running)
 		{
 			// Timer
-			game->set_cap_timer(game, frames);
-			int frame_ticks = game->get_cap_ticks(game);
+			//game->set_cap_timer(game, frames);
+			//int frame_ticks = game->get_cap_ticks(game);
 
 			// Rendering
 			game->render(game);
 			SDL_Delay(1000);
 			game->stop(game);
 
+			/*
 			// Timer
 			if( frame_ticks < TIME_PER_FRAME )
 			{
 				SDL_Delay( TIME_PER_FRAME - frame_ticks );
 			}
 			frames++;
+			*/
 		}
 
 		game->close(game);
+		destroy_display(game->display);
+		free(game);
+		game = NULL;
 	}
 	else
 	{
@@ -44,6 +49,8 @@ int main(int args, char *argv[])
 			   SDL_GetError());
 	}
 
+
+	SDL_Quit();
 	return(0);
 }
 

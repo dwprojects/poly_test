@@ -134,3 +134,9 @@ Vec2 * vec2_init(GLfloat x, GLfloat y)
 
 	return(v);
 }
+
+void destroy_vec2(Vec2 *v)
+{
+	free(v);
+	v = NULL;
+}

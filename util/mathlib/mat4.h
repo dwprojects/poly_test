@@ -16,5 +16,6 @@ typedef struct _Mat4 {
 } Mat4;
 
 Mat4 * mat4_init();
+void destroy_mat4(Mat4 *mat4);
 
 #endif

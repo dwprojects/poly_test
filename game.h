@@ -5,6 +5,7 @@
 #define SCREEN_HEIGHT 480
 #define FPS 60
 #define TIME_PER_FRAME 1000 / FPS
+#define TITLE "OpenGL Test"
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -17,6 +18,7 @@
 #include "camera.h"
 #include "input.h"
 #include "transform.h"
+#include "./util/mathlib/vertex_array.h"
 #include "./util/timer/timer.h"
 
 typedef struct _Game 
@@ -30,6 +32,7 @@ typedef struct _Game
 	Camera *camera;
 
 	Model *model;
+	Model *model2;
 	Shader *shader;
 
 	void (*start)(struct _Game *);

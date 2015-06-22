@@ -1,6 +1,6 @@
 #include "timer.h"
 
-static void start_timer(Timer *self)
+void start_timer(Timer *self)
 {
 	self->started = 1;
 	self->paused = 0;
@@ -8,7 +8,7 @@ static void start_timer(Timer *self)
 	self->pause_ticks = 0;
 }
 
-static void stop_timer(Timer *self)
+void stop_timer(Timer *self)
 {
 	self->started = 0;
 	self->paused = 0;
@@ -16,7 +16,7 @@ static void stop_timer(Timer *self)
 	self->pause_ticks = 0;
 }
 
-static unsigned int get_ticks(Timer *self)
+unsigned int get_ticks(Timer *self)
 {
 	unsigned int t = 0;
 	if (self->started)
@@ -50,9 +50,13 @@ Timer * timer_init()
 		timer->pause_ticks = 0;
 		timer->started = 0;
 		timer->paused = 0;
-	}
 
-	return(timer);
+		return(timer);
+	}
+	else
+	{
+		return(NULL);
+	}
 }
 
 void destroy_timer(Timer *timer)

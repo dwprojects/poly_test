@@ -15,5 +15,6 @@ typedef struct _Vertex {
 Vertex * vertex_init(Vec3 *v);
 Vertex * vertex_init_float(GLfloat x, GLfloat y,
 						   GLfloat z);
+void destroy_vertex(Vertex *);
 
 #endif

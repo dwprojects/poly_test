@@ -150,3 +150,9 @@ Vec3 * vec3_init(GLfloat x, GLfloat y, GLfloat z)
 
 	return(v);
 }
+
+void destroy_vec3(Vec3 *v)
+{
+	free(v);
+	v = NULL;
+}

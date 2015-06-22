@@ -24,4 +24,6 @@ typedef struct _Quaternion {
 Quaternion * quaternion_init(GLfloat x, GLfloat y,
 							 GLfloat z, GLfloat w);
 
+void destroy_quaternion(Quaternion *);
+
 #endif

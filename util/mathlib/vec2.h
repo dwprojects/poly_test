@@ -26,5 +26,6 @@ typedef struct _Vec2 {
 } Vec2;
 
 Vec2 * vec2_init(GLfloat x, GLfloat y);
+void destroy_vec2(Vec2 *);
 
 #endif

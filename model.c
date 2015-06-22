@@ -13,7 +13,6 @@ void draw(Model *self)
 	glBindVertexArray(0);
 }
 
-//Model * model_init(Vertex **vertices, unsigned int vertex_count)
 Model * model_init(GLfloat *vertices, unsigned int vertex_count)
 {
 	// Init
@@ -21,41 +20,46 @@ Model * model_init(GLfloat *vertices, unsigned int vertex_count)
 	model = malloc(sizeof(Model));
 
 	// Methods
-	model->draw = draw;
+	if (model)
+	{
+		model->draw = draw;
 
-	// Attributes
-	model->draw_count = vertex_count;
-	
-	glGenVertexArrays(1, &(model->vertex_array_object));
-	glBindVertexArray(model->vertex_array_object);
+		// Attributes
+		model->draw_count = vertex_count;
 
-	glGenBuffers(NUM_BUFFERS, model->vertex_array_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, model->vertex_array_buffer[POSITION_VB]);
-	
-	glBufferData(GL_ARRAY_BUFFER,			
-				 3 * vertex_count * sizeof(vertices[0]),
-				 vertices,
-				 GL_STATIC_DRAW);
-	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0,
-						  3,
-						  GL_FLOAT,
-						  GL_FALSE,
-						  //GL_TRUE,
-						  0,
-						  0);
+		glGenVertexArrays(1, &(model->vertex_array_object));
+		glBindVertexArray(model->vertex_array_object);
 
-	glBindVertexArray(0);
+		glGenBuffers(NUM_BUFFERS, model->vertex_array_buffer);
+		glBindBuffer(GL_ARRAY_BUFFER, model->vertex_array_buffer[POSITION_VB]);
 
-	return(model);
+		glBufferData(GL_ARRAY_BUFFER,
+					 vertex_count * sizeof(vertices[0]),
+					 vertices,
+					 GL_STATIC_DRAW);
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0,
+							  3,
+							  GL_FLOAT,
+							  GL_TRUE,
+							  0,
+							  0);
+
+		glBindVertexArray(0);
+
+		return(model);
+	}
+	else
+	{
+		return(NULL);
+	}
 }
 
 void destroy_model(Model *model)
 {
 	glDeleteBuffers(NUM_BUFFERS, model->vertex_array_buffer);
 	glDeleteVertexArrays(1, &(model->vertex_array_object));
-	glDisableVertexAttribArray(0);
 	free(model);
 	model = NULL;
 }

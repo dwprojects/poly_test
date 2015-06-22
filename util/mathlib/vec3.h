@@ -28,5 +28,6 @@ typedef struct _Vec3 {
 } Vec3;
 
 Vec3 * vec3_init(GLfloat x, GLfloat y, GLfloat z);
+void destroy_vec3(Vec3 *);
 
 #endif

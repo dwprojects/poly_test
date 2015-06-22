@@ -22,7 +22,6 @@ typedef struct _Model {
 	
 } Model;
 
-//Model * model_init(Vertex **vertices, unsigned int vertex_count);
 Model * model_init(GLfloat *vertices, unsigned int vertex_count);
 void destroy_model(Model *);
 

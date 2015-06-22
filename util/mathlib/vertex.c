@@ -26,3 +26,10 @@ Vertex * vertex_init_float(GLfloat x, GLfloat y,
 
 	return(vertex);
 }
+
+void destroy_vertex(Vertex *v)
+{
+	destroy_vec3(v->pos);
+	free(v);
+	v = NULL;
+}

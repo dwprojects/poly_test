@@ -112,3 +112,9 @@ Mat4 * mat4_init()
 
 	return(mat4);
 }
+
+void destroy_mat4(Mat4 *mat4)
+{
+	free(mat4);
+	mat4 = NULL;
+}
