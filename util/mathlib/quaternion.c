@@ -9,6 +9,24 @@ static GLfloat length(Quaternion *self)
 				(self->w * self->w)));
 }
 
+static void normalize(Quaternion *self)
+{
+	GLfloat length = self->length(self);
+
+	self->x = self->x / length;
+	self->y = self->y / length;
+	self->z = self->z / length;
+	self->w = self->w / length;
+}
+
+static Quaternion * conjugate(Quaternion *self)
+{
+	return(quaternion_init(-(self->x),
+						   -(self->y),
+						   -(self->z),
+						   -(self->w)));
+}
+
 Quaternion * quaternion_init(GLfloat x, GLfloat y,
 							 GLfloat z, GLfloat w)
 {
@@ -19,6 +37,8 @@ Quaternion * quaternion_init(GLfloat x, GLfloat y,
 	{
 		// Methods
 		quaternion->length = length;
+		quaternion->normalize = normalize;
+		quaternion->conjugate = conjugate;
 
 		// Attributes
 		quaternion->x = x;

@@ -13,6 +13,8 @@ typedef struct _Quaternion {
 	GLfloat w;
 
 	GLfloat (*length)(struct _Quaternion *);
+	void (*normalize)(struct _Quaternion *);
+	struct _Quaternion * (*conjugate)(struct _Quaternion *);
 } Quaternion;
 
 Quaternion * quaternion_init(GLfloat x, GLfloat y,
