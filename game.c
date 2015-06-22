@@ -33,8 +33,8 @@ static int get_cap_ticks(Game *self)
 
 static void render(Game *self)
 {
-	self->display->clear(self->display, 0.0f, 0.15f, 0.20f, 1.0f);
-	self->display->update(self->display);
+	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
+	render_update(self->display->window);
 }
 
 static void close(Game *self)

@@ -7,8 +7,10 @@ engine: main.o \
 	timer.o \
 	input.o \
 	transform.o \
-	camera.o
-	
+	camera.o \
+	model.o \
+	shader.o \
+
 	gcc -Wall -g -o engine main.o \
 	game.o \
 	mathlib.o \
@@ -19,6 +21,8 @@ engine: main.o \
 	input.o \
 	transform.o \
 	camera.o \
+	model.o \
+	shader.o \
 	-framework SDL2 -framework OpenGL -lGLEW
 
 test_mathlib: mathlib.o util.o
@@ -49,6 +53,12 @@ input.o: input.c
 
 transform.o: transform.c
 	gcc -c transform.c
+
+mode.o: model.c
+	gcc -c model.c
+
+shader.o: shader.c
+	gcc -c shader.c
 
 timer.o: ./util/timer/timer.c
 	gcc -c ./util/timer/timer.c
