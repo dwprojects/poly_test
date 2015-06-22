@@ -3,9 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
-#include "display.h"
-#include "render.h"
-#include "./util/timer/timer.h"
+#include "game.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480

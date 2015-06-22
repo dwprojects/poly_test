@@ -6,37 +6,27 @@
 
 int main(int args, char *argv[])
 {
-	Display *display;
-
+	Game *game = NULL;
 	SDL_Init(SDL_INIT_EVERYTHING);
-    display = display_init("OpenGL Test", SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    game = game_init();
 
-    Timer *fps = timer_init();
-    Timer *cap = timer_init();
-
-    if (display)
+    if (game)
     {
-		int running = 1;
     	int frames = 0;
 
-    	fps->start_timer(fps);
+    	game->run(game);
 
-		while(running)
+		while(game->running)
 		{
 			// Timer
-			cap->start_timer(cap);
-			float avg_fps = frames / ( fps->get_ticks(fps) / 1000.f );
-			if( avg_fps > 2000000 )
-			{ 
-				avg_fps = 0;
-			}
-			int frame_ticks = cap->get_ticks(cap);
+			game->set_cap_timer(game, frames);
+			int frame_ticks = game->get_cap_ticks(game);
 
 			// Rendering
-			display->clear(display, 0.0f, 0.15f, 0.20f, 1.0f);
-			display->update(display);
+			game->render(game);
 			SDL_Delay(1000);
-			running = 0;
+			game->stop(game);
 
 			// Timer
 			if( frame_ticks < TIME_PER_FRAME )
@@ -46,9 +36,7 @@ int main(int args, char *argv[])
 			frames++;
 		}
 
-		destroy_display(display);
-		destroy_timer(fps);
-		destroy_timer(cap);
+		game->close(game);
 	}
 	else
 	{
