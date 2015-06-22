@@ -55,7 +55,7 @@ input.o: input.c
 transform.o: transform.c
 	gcc -c transform.c
 
-mode.o: model.c
+model.o: model.c
 	gcc -c model.c
 
 shader.o: shader.c
@@ -81,7 +81,7 @@ mathlib.o: ./util/mathlib/vec2.c \
 	 ./util/mathlib/mat4.c \
 	 ./util/mathlib/quaternion.c \
 	 ./util/mathlib/vertex.c
-	 
+
 	ld -r vec2.o vec3.o vec4.o vertex.o mat4.o quaternion.o -o mathlib.o
 
 clean:

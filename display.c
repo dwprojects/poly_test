@@ -13,7 +13,7 @@ Display * display_init(char *title, int screen_width, int screen_height)
     {
     	// Methods
 
-        // Attributes
+      // Attributes
     	display->window = NULL;
 
     	display->window = SDL_CreateWindow(title,

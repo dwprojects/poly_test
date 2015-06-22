@@ -10,7 +10,10 @@
 #include <GL/glew.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "model.h"
+#include "shader.h"
 #include "display.h"
+#include "render.h"
 #include "camera.h"
 #include "input.h"
 #include "transform.h"
@@ -25,6 +28,9 @@ typedef struct _Game
 
 	Transform *transform;
 	Camera *camera;
+
+	Model *model;
+	Shader *shader;
 
 	void (*start)(struct _Game *);
 	void (*stop)(struct _Game *);

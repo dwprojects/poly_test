@@ -34,6 +34,8 @@ static int get_cap_ticks(Game *self)
 static void render(Game *self)
 {
 	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
+	self->shader->bind(self->shader);
+	self->model->draw(self->model);
 	render_update(self->display->window);
 }
 
@@ -44,6 +46,8 @@ static void close(Game *self)
 	destroy_timer(self->cap);
 	destroy_transform(self->transform);
 	destroy_camera(self->camera);
+	destroy_model(self->model);
+	destroy_shader(self->shader);
 }
 
 Game * game_init()
@@ -69,6 +73,8 @@ Game * game_init()
 		game->cap = NULL;
 		game->transform = NULL;
 		game->camera = NULL;
+		game->model = NULL;
+		game->shader = NULL;
 
 		// Display
 		game->display = display_init("OpenGL Test", SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -77,6 +83,7 @@ Game * game_init()
 			printf("Error creating display: %s\n",
 				   SDL_GetError());
 		}
+		render_init_graphics();
 
 		// Timers
 		game->fps = timer_init();
@@ -100,6 +107,22 @@ Game * game_init()
     		printf("Error creating camera\n");
     	}
 
+    	// Model
+    	/*
+		Vertex *v1 = vertex_init_float(-0.5f, -0.5f, 0.0f);
+	    Vertex *v2 = vertex_init_float(0.5f, -0.5f, 0.0f);
+	    Vertex *v3 = vertex_init_float(0.0f, 0.5f, 0.0f);
+	    Vertex *vertices[] = {v1, v2, v3};
+	    */
+        GLfloat vertices[] = {-0.5f, -0.5f, 0.0f,
+		 					   0.5f, -0.5f, 0.0f,
+    	 					   0.0f, 0.5f, 0.0f};
+
+		game->model = model_init(vertices, (int)sizeof(vertices)/sizeof(vertices[0]));
+
+		// Shader
+		game->shader = shader_init("./res/basic_shader");
+	    
 	}
 
 	return(game);

@@ -12,3 +12,17 @@ Vertex * vertex_init(Vec3 *v)
 
 	return(vertex);
 }
+
+Vertex * vertex_init_float(GLfloat x, GLfloat y,
+						   GLfloat z)
+{
+	Vertex *vertex = NULL;
+	vertex = malloc(sizeof(Vertex));
+	if (vertex)
+	{
+		vertex->size = 3;
+		vertex->pos = vec3_init(x, y, z);
+	}
+
+	return(vertex);
+}
