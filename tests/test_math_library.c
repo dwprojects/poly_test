@@ -10,11 +10,12 @@
 int test_vec2(GLfloat _x, GLfloat _y);
 int test_vec3(GLfloat _x, GLfloat _y, GLfloat _z);
 int test_mat4();
+int test_quaternion(GLfloat _x, GLfloat _y, GLfloat _z,
+					GLfloat w);
 /*
 int test_vec4(GLfloat _x, GLfloat _y, GLfloat _z,
 			  GLfloat _w);
 int test_vertex(Vec3 _v);
-int test_quaternion();
 */
 
 GLfloat x = 1.0f;
@@ -80,18 +81,9 @@ int main(int argc, char *args[])
 	errors += test_vec2(x, y);
 	errors += test_vec3(x, y, z);
 	errors += test_mat4();
+	errors += test_quaternion(x, y, z, w);
 	
 	/*
-	if (!test_Vec3_values())
-	{
-		printf("test_Vec3_values: failed\n");
-		error++;
-	}
-	if (!test_Vec4_values())
-	{
-		printf("test_Vec4_values: failed\n");
-		error++;
-	}
 	if (!test_Vertex_values())
 	{
 		printf("test_Vertex_values: failed\n");
