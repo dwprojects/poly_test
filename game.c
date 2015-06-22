@@ -13,10 +13,9 @@ static void stop(Game *self)
 static void run(Game *self)
 {
 	self->start(self);
-	//self->fps->start_timer(self->fps);
+	self->fps->start_timer(self->fps);
 }
 
-/*
 static void set_cap_timer(Game *self, int frames)
 {
 	self->cap->start_timer(self->cap);
@@ -31,7 +30,6 @@ static int get_cap_ticks(Game *self)
 {
 	return(self->cap->get_ticks(self->cap));
 }
-*/
 
 static void render(Game *self)
 {
@@ -40,36 +38,16 @@ static void render(Game *self)
 	self->shader->bind(self->shader);
 	self->model->draw(self->model);
 	render_update(self->display->window);
-
-	/*
-	glClearColor(0.0f, 0.15f, 0.2f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	self->shader->bind(self->shader);
-	self->model->draw(self->model);
-	SDL_GL_SwapWindow(self->display->window);
-	*/
 }
 
 static void close(Game *self)
 {
-	printf("Begin freeing:\n");
-
-	/*
-	//destroy_timer(self->fps);
-	//printf("fps\n");
-	//destroy_timer(self->cap);
-	//printf("cap\n");
+	destroy_timer(self->fps);
+	destroy_timer(self->cap);
 	destroy_transform(self->transform);
-	printf("transform\n");
 	destroy_camera(self->camera);
-	printf("camera\n");
-	*/
 	destroy_model(self->model);
-	//printf("model\n");
 	destroy_shader(self->shader);
-	//printf("shader\n");
-
-	printf("Freed all\n");
 }
 
 Game * game_init()
@@ -83,8 +61,8 @@ Game * game_init()
 		game->start = start;
 		game->stop = stop;
 		game->run = run;
-		//game->set_cap_timer = set_cap_timer;
-		//game->get_cap_ticks = get_cap_ticks;
+		game->set_cap_timer = set_cap_timer;
+		game->get_cap_ticks = get_cap_ticks;
 		game->render = render;
 		game->close = close;
 
@@ -109,17 +87,14 @@ Game * game_init()
 		render_init_graphics();
 
 		// Timers
-		//game->fps = timer_init();
-		/*
+		game->fps = timer_init();
     	game->cap = timer_init();
     	if ((game->fps == NULL) && (game->cap == NULL))
     	{
     		printf("Error creating timers\n");
     		exit(1);
     	}
-    	*/
 
-    	/*
     	// Transform
     	game->transform = transform_init();
     	if (!game->transform)
@@ -135,10 +110,8 @@ Game * game_init()
     		printf("Error creating camera\n");
     		exit(1);
     	}
-    	*/
 
     	// Model
-    	
 		Vertex *v1 = vertex_init_float(-0.6f, -0.5f, 0.0f);
 	    Vertex *v2 = vertex_init_float(0.5f, -0.5f, 0.0f);
 	    Vertex *v3 = vertex_init_float(0.0f, 0.5f, 0.0f);
@@ -156,7 +129,6 @@ Game * game_init()
 		// Shader
 		game->shader = shader_init("./res/basic_shader");
 
-		printf("Game initialized.\n");
 	    return(game);
 	}
 	return(NULL);

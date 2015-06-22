@@ -36,7 +36,7 @@ unsigned int get_ticks(Timer *self)
 Timer * timer_init()
 {
 	Timer *timer = NULL;
-	timer = malloc(sizeof(timer));
+	timer = malloc(sizeof(Timer));
 
 	if (timer)
 	{

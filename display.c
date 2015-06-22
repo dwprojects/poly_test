@@ -39,9 +39,7 @@ Display * display_init(char *title, int screen_width, int screen_height)
 void destroy_display(Display *display)
 {
     SDL_GL_DeleteContext(display->gl_context);
-    printf("Destroying window\n");
     SDL_DestroyWindow(display->window);
-    printf("Destroyed window.\n");
     free(display);
     display = NULL;
 }
