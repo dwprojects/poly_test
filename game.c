@@ -94,7 +94,7 @@ Game * game_init()
     	}
 
     	// Camera
-    	game->camera = camera_init();
+    	game->camera = camera_init(NULL, NULL, NULL);
     	if (!game->camera)
     	{
     		printf("Error creating camera\n");
