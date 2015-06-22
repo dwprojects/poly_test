@@ -6,6 +6,7 @@ Vertex * vertex_init(Vec3 *v)
 	vertex = malloc(sizeof(Vertex));
 	if (vertex)
 	{
+		vertex->size = 3;
 		vertex->pos = v;
 	}
 

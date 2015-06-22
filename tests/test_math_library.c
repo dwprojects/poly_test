@@ -12,6 +12,7 @@ int test_vec3(GLfloat _x, GLfloat _y, GLfloat _z);
 int test_mat4();
 int test_quaternion(GLfloat _x, GLfloat _y, GLfloat _z,
 					GLfloat w);
+int test_vertex(GLfloat _x, GLfloat _y, GLfloat _z);
 /*
 int test_vec4(GLfloat _x, GLfloat _y, GLfloat _z,
 			  GLfloat _w);
@@ -82,6 +83,7 @@ int main(int argc, char *args[])
 	errors += test_vec3(x, y, z);
 	errors += test_mat4();
 	errors += test_quaternion(x, y, z, w);
+	errors += test_vertex(x, y, z);
 	
 	/*
 	if (!test_Vertex_values())

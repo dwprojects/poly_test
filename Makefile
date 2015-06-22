@@ -31,6 +31,7 @@ test_mathlib: mathlib.o util.o
 	 ./tests/test_math_library_vec3.c \
 	 ./tests/test_math_library_mat4.c \
 	 ./tests/test_math_library_quaternion.c \
+	 ./tests/test_math_library_vertex.c \
 	 -framework SDL2 -framework OpenGL -lGLEW
 
 main.o: main.c
@@ -69,15 +70,18 @@ util.o: ./util/util.c
 mathlib.o: ./util/mathlib/vec2.c \
 	./util/mathlib/vec3.c \
 	./util/mathlib/vec4.c \
-	./util/mathlib/vertex.c \
-	./util/mathlib/mat4.c
+	./util/mathlib/mat4.c \
+	./util/mathlib/quaternion.c \
+	./util/mathlib/vertex.c
 
 	gcc -c ./util/mathlib/vec2.c \
 	 ./util/mathlib/vec3.c \
 	 ./util/mathlib/vec4.c \
 	 ./util/mathlib/vertex.c \
 	 ./util/mathlib/mat4.c \
-	 ./util/mathlib/quaternion.c
+	 ./util/mathlib/quaternion.c \
+	 ./util/mathlib/vertex.c
+	 
 	ld -r vec2.o vec3.o vec4.o vertex.o mat4.o quaternion.o -o mathlib.o
 
 clean:

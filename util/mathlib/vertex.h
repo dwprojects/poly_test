@@ -8,6 +8,7 @@
 #include "vec3.h"
 
 typedef struct _Vertex {
+	int size;
 	Vec3 *pos;
 } Vertex;
 
