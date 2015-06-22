@@ -27,6 +27,16 @@ static Quaternion * conjugate(Quaternion *self)
 						   -(self->w)));
 }
 
+static Quaternion * mul(Quaternion *self, Quaternion *r)
+{
+	GLfloat _w = (self->w * r->w) - (self->x * r->x) - (self->y * r->y) - (self->z * r->z);
+	GLfloat _x = (self->x * r->w) + (self->w * r->x) + (self->y * r->z) - (self->z * r->y);
+	GLfloat _y = (self->y * r->w) + (self->w * r->y) + (self->z * r->x) - (self->x * r->z);
+	GLfloat _z = (self->z * r->w) + (self->w * r->z) + (self->x * r->y) - (self->y * r->x);
+
+	return(quaternion_init(_x, _y, _z, _w));
+}
+
 Quaternion * quaternion_init(GLfloat x, GLfloat y,
 							 GLfloat z, GLfloat w)
 {
@@ -39,6 +49,7 @@ Quaternion * quaternion_init(GLfloat x, GLfloat y,
 		quaternion->length = length;
 		quaternion->normalize = normalize;
 		quaternion->conjugate = conjugate;
+		quaternion->mul = mul;
 
 		// Attributes
 		quaternion->x = x;
