@@ -8,6 +8,11 @@
 
 typedef struct _Mat4 {
 	GLfloat m[4][4];
+
+	void (*init_identity)(struct _Mat4 *);
+	struct _Mat4 * (*mul)(struct _Mat4 *, struct _Mat4 *r);
 } Mat4;
+
+Mat4 * mat4_init();
 
 #endif
