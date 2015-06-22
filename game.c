@@ -43,6 +43,7 @@ static void close(Game *self)
 	destroy_timer(self->fps);
 	destroy_timer(self->cap);
 	destroy_transform(self->transform);
+	destroy_camera(self->camera);
 }
 
 Game * game_init()
@@ -67,6 +68,7 @@ Game * game_init()
 		game->fps = NULL;
 		game->cap = NULL;
 		game->transform = NULL;
+		game->camera = NULL;
 
 		// Display
 		game->display = display_init("OpenGL Test", SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -89,6 +91,13 @@ Game * game_init()
     	if (!game->transform)
     	{
     		printf("Error creating transform\n");
+    	}
+
+    	// Camera
+    	game->camera = camera_init();
+    	if (!game->camera)
+    	{
+    		printf("Error creating camera\n");
     	}
 
 	}

@@ -1,5 +1,14 @@
-engine: main.o game.o mathlib.o util.o display.o render.o \
- timer.o input.o transform.o
+engine: main.o \
+	game.o \
+	mathlib.o \
+	util.o \
+	display.o \
+	render.o \
+	timer.o \
+	input.o \
+	transform.o \
+	camera.o
+	
 	gcc -Wall -g -o engine main.o \
 	game.o \
 	mathlib.o \
@@ -9,6 +18,7 @@ engine: main.o game.o mathlib.o util.o display.o render.o \
 	timer.o \
 	input.o \
 	transform.o \
+	camera.o \
 	-framework SDL2 -framework OpenGL -lGLEW
 
 test_mathlib: mathlib.o util.o
@@ -30,6 +40,9 @@ display.o: display.c
 
 render.o: render.c
 	gcc -c render.c
+
+camera.o: camera.c
+	gcc -c camera.c
 
 input.o: input.c
 	gcc -c input.c
