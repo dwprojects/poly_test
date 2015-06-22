@@ -42,6 +42,7 @@ static void close(Game *self)
 	destroy_display(self->display);
 	destroy_timer(self->fps);
 	destroy_timer(self->cap);
+	destroy_transform(self->transform);
 }
 
 Game * game_init()

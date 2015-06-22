@@ -23,9 +23,9 @@ Mat4 * get_transformation(Transform *self)
 	if (t)
 	{
 		t->init_translation(t,
-						    t->x,
-					        t->y,
-					  	    t->z);
+						    self->translation->x,
+					        self->translation->y,
+					  	    self->translation->z);
 	}
 
 	return(t);
