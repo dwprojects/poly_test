@@ -45,7 +45,10 @@ int main(int args, char *argv[])
 			}
 			frames++;
 		}
+
 		destroy_display(display);
+		destroy_timer(fps);
+		destroy_timer(cap);
 	}
 	else
 	{

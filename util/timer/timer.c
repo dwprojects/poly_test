@@ -54,3 +54,9 @@ Timer * timer_init()
 
 	return(timer);
 }
+
+void destroy_timer(Timer *timer)
+{
+	free(timer);
+	timer = NULL;
+}

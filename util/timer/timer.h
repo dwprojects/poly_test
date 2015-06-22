@@ -15,5 +15,6 @@ typedef struct _Timer {
 } Timer;
 
 Timer * timer_init();
+void destroy_timer(Timer *);
 
 #endif
