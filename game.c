@@ -19,11 +19,6 @@ static void run(Game *self)
 static void set_cap_timer(Game *self, int frames)
 {
 	self->cap->start_timer(self->cap);
-	float avg_fps = frames / ( self->fps->get_ticks(self->fps) / 1000.f );
-	if( avg_fps > 2000000 )
-	{ 
-		avg_fps = 0;
-	}
 }
 
 static int get_cap_ticks(Game *self)
@@ -33,9 +28,16 @@ static int get_cap_ticks(Game *self)
 
 static void render(Game *self)
 {
+	Mat4 *model = NULL;
 
 	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
 	self->shader->bind(self->shader);
+	self->transform->set_translation(self->transform, 
+									 //0.0f,
+		sinf(SDL_GetTicks() * 0.001f),
+									 0.0f,
+									 0.0f);
+	self->shader->update(self->shader, self->transform);
 	self->model->draw(self->model);
 	render_update(self->display->window);
 }

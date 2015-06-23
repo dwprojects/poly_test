@@ -6,6 +6,7 @@ static void set_translation(Transform *self, GLfloat x,
 	self->translation->x = x;
 	self->translation->y = y;
 	self->translation->z = z;
+	//printf("%f, %f, %f\n", self->translation->x, self->translation->y, self->translation->z);
 }
 
 static void set_translation_vec3(Transform *self, Vec3 *r)
@@ -18,17 +19,18 @@ static void set_translation_vec3(Transform *self, Vec3 *r)
 Mat4 * get_transformation(Transform *self)
 {
 	Mat4 *t = NULL;
-	t = mat4_init();
-
-	if (t)
-	{
-		t->init_translation(t,
-						    self->translation->x,
+	t = mat4_init_translation(self->translation->x,
 					        self->translation->y,
 					  	    self->translation->z);
+	
+	if (t)
+	{
+		return(t);
 	}
-
-	return(t);
+	else
+	{
+		return(NULL);
+	}
 }
 
 Transform * transform_init()

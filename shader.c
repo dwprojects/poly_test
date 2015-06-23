@@ -96,22 +96,23 @@ void bind(Shader *self)
 	glUseProgram(self->program);
 }
 
-/*
 void shader_update(Shader *self, Transform *transform)
 {
 	Mat4 *model = NULL;
-	
-	model = transform->get_model(transform);
-	printf("%f, %f, %f %f\n", model->m[0][0], model->m[0][1], model->m[0][2], model->m[0][3]);
+
+	model = transform->get_transformation(transform);
+	//model = mat4_init();
+	//model = model->init_identity(model);
+	//printf("%f, %f, %f, %f\n", model->m[0][0], model->m[0][1], model->m[0][2], model->m[0][3]);
+	//model->m[0][0] = sinf(SDL_GetTicks() * 0.0001f);
 
 
 	glUniformMatrix4fv(self->uniforms[TRANSFORM_U],
 					   1,
 					   GL_TRUE,
 					   &(model->m[0][0]));
-	free(model);
+	destroy_mat4(model);
 }
-*/
 
 Shader * shader_init(char *str)
 {
@@ -124,16 +125,15 @@ Shader * shader_init(char *str)
 	shader->check_shader_error = check_shader_error;
 	shader->create_shader = create_shader;
 	shader->bind = bind;
-	//shader->update = shader_update;
+	shader->update = shader_update;
 
 	// Attributes
 	shader->program = glCreateProgram();
 
 	shader->shaders[0] = create_shader(shader,
 									   //load_shader(shader, str, ".vs"),
-										//"#version 120\nattribute vec3 position;\nuniform mat4 transform;\nvoid main()\n{\ngl_Position = transform * vec4(position, 1.0);\n}",
-										"#version 120\nattribute vec3 position;\nvoid main()\n{\ngl_Position = vec4(position, 1.0);\n}",
-										//"#version 120\nattribute vec3 position;\nuniform mat4 transform;\nvoid main()\n{\ngl_Position = transform * vec4(position, 1.0);\n}",
+										//"#version 120\nattribute vec3 position;\nvoid main()\n{\ngl_Position = vec4(position, 1.0);\n}",
+										"#version 120\nattribute vec3 position;\nuniform mat4 transform;\nvoid main()\n{\ngl_Position = transform * vec4(position, 1.0);\n}",
 									   GL_VERTEX_SHADER);
 	shader->shaders[1] = create_shader(shader,
 									   //load_shader(shader, str, ".fs"),
