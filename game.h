@@ -42,6 +42,7 @@ typedef struct _Game
 	void (*set_cap_timer)(struct _Game *, int frames);
 	int (*get_cap_ticks)(struct _Game *);
 	void (*render)(struct _Game *);
+	void (*update)(struct _Game *);
 	void (*close)(struct _Game *);
 } Game;
 

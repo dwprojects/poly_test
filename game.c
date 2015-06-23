@@ -33,6 +33,21 @@ static void render(Game *self)
 	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
 	self->shader->bind(self->shader);
 	
+	self->update(self);
+
+	self->shader->update(self->shader, self->transform);
+	self->model->draw(self->model);
+	render_update(self->display->window);
+	self->counter += 0.1f;
+}
+
+static void update(Game *self)
+{
+	self->transform->set_scaling(self->transform, 
+								  sinf(self->counter),
+								  sinf(self->counter),
+		 						  sinf(self->counter));
+
 	self->transform->set_rotation(self->transform, 
 								  0.0f,
 								  0.0f,
@@ -42,11 +57,6 @@ static void render(Game *self)
 									 sinf(self->counter) * 0.5f,
 									 cosf(self->counter) * 0.5f,
 									 0.0f);
-
-	self->shader->update(self->shader, self->transform);
-	self->model->draw(self->model);
-	render_update(self->display->window);
-	self->counter += 0.1f;
 }
 
 static void close(Game *self)
@@ -74,6 +84,7 @@ Game * game_init()
 		game->set_cap_timer = set_cap_timer;
 		game->get_cap_ticks = get_cap_ticks;
 		game->render = render;
+		game->update = update;
 		game->close = close;
 
 		// Attributes

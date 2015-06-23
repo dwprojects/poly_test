@@ -8,6 +8,11 @@
 typedef struct _Transform {
 	Vec3 *translation;
 	Vec3 *rotation;
+	Vec3 *scaling;
+
+	void (*set_scaling)(struct _Transform *, GLfloat x,
+						 GLfloat y, GLfloat z);
+	void (*set_scaling_vec3)(struct _Transform *, Vec3 *r);
 
 	void (*set_rotation)(struct _Transform *, GLfloat x,
 						 GLfloat y, GLfloat z);

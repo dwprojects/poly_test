@@ -1,5 +1,20 @@
 #include "transform.h"
 
+static void set_scaling(Transform *self, GLfloat x,
+					    GLfloat y, GLfloat z)
+{
+	self->scaling->x = x;
+	self->scaling->y = y;
+	self->scaling->z = z;
+}
+
+static void set_scaling_vec3(Transform *self, Vec3 *r)
+{
+	self->scaling->x = r->x;
+	self->scaling->y = r->y;
+	self->scaling->z = r->z;
+}
+
 static void set_rotation(Transform *self, GLfloat x,
 							GLfloat y, GLfloat z)
 {
@@ -34,6 +49,7 @@ Mat4 * get_transformation(Transform *self)
 {
 	Mat4 *t = NULL;
 	Mat4 *r = NULL;
+	Mat4 *s = NULL;
 
 	t = mat4_init_translation(self->translation->x,
 					        self->translation->y,
@@ -41,10 +57,13 @@ Mat4 * get_transformation(Transform *self)
 	r = mat4_init_rotation(self->rotation->x,
 					        self->rotation->y,
 					  	    self->rotation->z);
+	s = mat4_init_scaling(self->scaling->x,
+					        self->scaling->y,
+					  	    self->scaling->z);
 
-	if (t && r)
+	if (t && r && s)
 	{
-		return(t->mul(t, r));
+		return(s->mul(s, (t->mul(t,r))));
 	}
 	else
 	{
@@ -62,11 +81,14 @@ Transform * transform_init()
 		// Methods
 		transform->get_transformation = get_transformation;
 
-		transform->set_translation = set_translation;
-		transform->set_translation_vec3 = set_translation_vec3;	
+		transform->set_scaling = set_scaling;
+		transform->set_scaling_vec3 = set_scaling_vec3;
 
 		transform->set_rotation = set_rotation;
 		transform->set_rotation_vec3 = set_rotation_vec3;
+
+		transform->set_translation = set_translation;
+		transform->set_translation_vec3 = set_translation_vec3;	
 
 		// Attributes
 		transform->translation = NULL;
@@ -77,6 +99,11 @@ Transform * transform_init()
 		transform->rotation = vec3_init(0.0f,
 										0.0f,
 										0.0f);
+
+		transform->scaling = NULL;
+		transform->scaling = vec3_init(1.0f,
+										1.0f,
+										1.0f);
 	}
 	return(transform);
 }
