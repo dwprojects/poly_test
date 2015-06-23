@@ -6,7 +6,6 @@ static void set_rotation(Transform *self, GLfloat x,
 	self->rotation->x = x;
 	self->rotation->y = y;
 	self->rotation->z = z;
-	printf("%f, %f, %f\n", self->rotation->x, self->rotation->y, self->rotation->z);
 }
 
 static void set_rotation_vec3(Transform *self, Vec3 *r)
@@ -22,7 +21,6 @@ static void set_translation(Transform *self, GLfloat x,
 	self->translation->x = x;
 	self->translation->y = y;
 	self->translation->z = z;
-	//printf("%f, %f, %f\n", self->translation->x, self->translation->y, self->translation->z);
 }
 
 static void set_translation_vec3(Transform *self, Vec3 *r)
@@ -46,19 +44,7 @@ Mat4 * get_transformation(Transform *self)
 
 	if (t && r)
 	{
-		/*
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				printf("m[%d][%d]: %f ", i, j, m->m[i][j]);
-			}
-		}
-		printf("\n");
-		return(m);
-		*/
-		//return(t->mul(t, r));
-		return(r);
+		return(t->mul(t, r));
 	}
 	else
 	{

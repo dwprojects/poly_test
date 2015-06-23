@@ -123,15 +123,6 @@ Mat4 * mat4_init_rotation(GLfloat x, GLfloat y,
 		rz->m[3][1] = 0.0f;
 		rz->m[3][2] = 0.0f;
 		rz->m[3][3] = 1.0;
-		/*
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				printf("m[%d][%d]: %f ", i, j, m->m[i][j]);
-			}
-		}
-		*/
 	}
 
 	if(rx)
@@ -201,13 +192,8 @@ Mat4 * mat4_init_rotation(GLfloat x, GLfloat y,
 
 	}
 
-	//Mat4 *yx = ry->mul(ry, rx);
-	//r = rz->mul(rz, yx);
-
-
-	//r = rz->mul(rz, ry->mul(ry, rx));
-	//return(r);
-	return(rz);
+	r = rz->mul(rz, ry->mul(ry, rx));
+	return(r);
 }
 
 Mat4 * mat4_init_translation(GLfloat x, GLfloat y,

@@ -32,25 +32,17 @@ static void render(Game *self)
 
 	render_clear_color(0.0f, 0.15f, 0.20f, 1.0f);
 	self->shader->bind(self->shader);
-	///*
+	
 	self->transform->set_rotation(self->transform, 
-									 0.0f,
-		//sinf(SDL_GetTicks() * 0.006f) / 2,
-									 0.0f,
-		//cosf(SDL_GetTicks() * 0.006f) / 2,
-									 //0.0f);
-		 sinf(self->counter) * 180);
+								  0.0f,
+								  0.0f,
+		 						  sinf(self->counter) * 180);
 
-	//*/
-	/*
 	self->transform->set_translation(self->transform, 
-									 0.0f,
-		//sinf(SDL_GetTicks() * 0.006f) / 2,
-									 0.0f,
-		//cosf(SDL_GetTicks() * 0.006f) / 2,
-									 //0.0f);
-		sinf(SDL_GetTicks()) / 2);
-	*/
+									 sinf(self->counter) * 0.5f,
+									 cosf(self->counter) * 0.5f,
+									 0.0f);
+
 	self->shader->update(self->shader, self->transform);
 	self->model->draw(self->model);
 	render_update(self->display->window);
