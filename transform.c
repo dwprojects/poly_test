@@ -1,5 +1,21 @@
 #include "transform.h"
 
+static void set_rotation(Transform *self, GLfloat x,
+							GLfloat y, GLfloat z)
+{
+	self->rotation->x = x;
+	self->rotation->y = y;
+	self->rotation->z = z;
+	printf("%f, %f, %f\n", self->rotation->x, self->rotation->y, self->rotation->z);
+}
+
+static void set_rotation_vec3(Transform *self, Vec3 *r)
+{
+	self->rotation->x = r->x;
+	self->rotation->y = r->y;
+	self->rotation->z = r->z;
+}
+
 static void set_translation(Transform *self, GLfloat x,
 							GLfloat y, GLfloat z)
 {
@@ -19,13 +35,30 @@ static void set_translation_vec3(Transform *self, Vec3 *r)
 Mat4 * get_transformation(Transform *self)
 {
 	Mat4 *t = NULL;
+	Mat4 *r = NULL;
+
 	t = mat4_init_translation(self->translation->x,
 					        self->translation->y,
 					  	    self->translation->z);
-	
-	if (t)
+	r = mat4_init_rotation(self->rotation->x,
+					        self->rotation->y,
+					  	    self->rotation->z);
+
+	if (t && r)
 	{
-		return(t);
+		/*
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				printf("m[%d][%d]: %f ", i, j, m->m[i][j]);
+			}
+		}
+		printf("\n");
+		return(m);
+		*/
+		//return(t->mul(t, r));
+		return(r);
 	}
 	else
 	{
@@ -41,17 +74,24 @@ Transform * transform_init()
 	if (transform)
 	{
 		// Methods
-		transform->set_translation = set_translation;
-		transform->set_translation_vec3 = set_translation_vec3;
 		transform->get_transformation = get_transformation;
+
+		transform->set_translation = set_translation;
+		transform->set_translation_vec3 = set_translation_vec3;	
+
+		transform->set_rotation = set_rotation;
+		transform->set_rotation_vec3 = set_rotation_vec3;
 
 		// Attributes
 		transform->translation = NULL;
 		transform->translation = vec3_init(0.0f,
 										   0.0f,
 										   0.0f);
+		transform->rotation = NULL;
+		transform->rotation = vec3_init(0.0f,
+										0.0f,
+										0.0f);
 	}
-
 	return(transform);
 }
 

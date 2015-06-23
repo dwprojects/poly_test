@@ -99,18 +99,13 @@ void bind(Shader *self)
 void shader_update(Shader *self, Transform *transform)
 {
 	Mat4 *model = NULL;
-
 	model = transform->get_transformation(transform);
-	//model = mat4_init();
-	//model = model->init_identity(model);
-	//printf("%f, %f, %f, %f\n", model->m[0][0], model->m[0][1], model->m[0][2], model->m[0][3]);
-	//model->m[0][0] = sinf(SDL_GetTicks() * 0.0001f);
-
 
 	glUniformMatrix4fv(self->uniforms[TRANSFORM_U],
 					   1,
 					   GL_TRUE,
 					   &(model->m[0][0]));
+
 	destroy_mat4(model);
 }
 

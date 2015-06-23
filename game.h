@@ -23,6 +23,7 @@
 
 typedef struct _Game 
 {
+	GLfloat counter;
 	int running;
 	Display *display;
 	Timer *fps;
